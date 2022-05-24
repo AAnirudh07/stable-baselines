@@ -40,9 +40,10 @@ Environment description:
         p > h
 
     Termination:
-        The environment terminates once the number of days reaches 100
+        The environment terminates once the number of days reaches 100.
 '''
 
+import os
 import gym
 from gym import spaces
 from gym import utils
@@ -65,6 +66,7 @@ class inventoryControlEnvironment(gym.Env):
         self.l = LAMBDA
         self.done = False
         self.t = 0 
+
         #verify the constraints
         assert self.n > 0
         assert self.K > 0
@@ -109,4 +111,9 @@ class inventoryControlEnvironment(gym.Env):
 
     def close(self):
         #no windows to close
+        os.system('cls') #windows
         print("Environment closed!")
+    
+    #print the current inventory and reward 
+    def render(self):
+        print(f"Current Inventory: {self.state} | Current reward: {self.reward}")
